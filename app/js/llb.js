@@ -2,8 +2,21 @@
 
 var llb_app = {}
 
+llb_app.fetch = function(url) {
+	base_url = 'https://llb.sis.uta.fi/api/v1/httpsproxy/'
+	return fetch(base_url+url)
+		.then(res => res.json())
+		.then(res => {
+			if(res.code == 200) {
+				return Promise.resolve(res.data);
+			}
+			else {
+				console.warn(res.details);
+				return Promise.reject(res.details);
+			}
+		})
+}
 llb_app.listeners = {}
-
 
 llb_app.addListener = function(type, callback)
 {

@@ -8,7 +8,7 @@ llb_app.fetch = function(url) {
 		.then(res => res.json())
 		.then(res => {
 			if(res.code == 200) {
-				return Promise.resolve(res.data);
+				return Promise.resolve(res.data.data);
 			}
 			else {
 				console.warn(res.details);
